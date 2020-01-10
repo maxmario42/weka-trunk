@@ -323,11 +323,16 @@ public class NaiveBayes extends AbstractClassifier implements OptionHandler,
       while (enumAtts.hasMoreElements()) {
         Attribute attribute = enumAtts.nextElement();
         if (!instance.isMissing(attribute)) {
+            
           m_Distributions[attIndex][(int) instance.classValue()].addValue(
             instance.value(attribute), instance.weight());
         }
         attIndex++;
       }
+      if (instance.weight()==0){
+          m_ClassDistribution.setLaplace(true);
+      }
+          
       m_ClassDistribution.addValue(instance.classValue(), instance.weight());
     }
   }

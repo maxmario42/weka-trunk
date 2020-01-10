@@ -50,6 +50,8 @@ public class DiscreteEstimator extends Estimator implements
    * Hold the sum of counts
    */
   private double m_SumOfCounts;
+  
+  private boolean m_isLaplace;
 
   /**
    * Initialization for counts
@@ -73,6 +75,7 @@ public class DiscreteEstimator extends Estimator implements
 
     m_Counts = new double[numSymbols];
     m_SumOfCounts = 0;
+    
     if (laplace) {
         /*
       m_FPrior = 1;
@@ -90,6 +93,10 @@ public class DiscreteEstimator extends Estimator implements
         m_Counts[i] += 1;
       }
       m_SumOfCounts += this.getNumSymbols();
+  }
+  
+  public void setLaplace(boolean laplace){
+      m_isLaplace=laplace;
   }
 
   /**
@@ -131,7 +138,7 @@ public class DiscreteEstimator extends Estimator implements
   public double getProbability(double data) {
 
     if (m_SumOfCounts == 0) {
-      this.addLaplace();
+      return 0;
     }
     return m_Counts[(int) data] / m_SumOfCounts;
   }
