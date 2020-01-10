@@ -74,12 +74,22 @@ public class DiscreteEstimator extends Estimator implements
     m_Counts = new double[numSymbols];
     m_SumOfCounts = 0;
     if (laplace) {
+        /*
       m_FPrior = 1;
       for (int i = 0; i < numSymbols; i++) {
         m_Counts[i] = 1;
       }
-      m_SumOfCounts = numSymbols;
+      m_SumOfCounts = numSymbols;*/
+        this.addLaplace();
     }
+  }
+  
+  public void addLaplace(){
+      m_FPrior += 1;
+      for (int i = 0; i < this.getNumSymbols(); i++) {
+        m_Counts[i] += 1;
+      }
+      m_SumOfCounts += this.getNumSymbols();
   }
 
   /**
@@ -121,7 +131,7 @@ public class DiscreteEstimator extends Estimator implements
   public double getProbability(double data) {
 
     if (m_SumOfCounts == 0) {
-      return 0;
+      this.addLaplace();
     }
     return m_Counts[(int) data] / m_SumOfCounts;
   }

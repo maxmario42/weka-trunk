@@ -243,7 +243,7 @@ public class NaiveBayes extends AbstractClassifier implements OptionHandler,
     // Reserve space for the distributions
     m_Distributions = new Estimator[m_Instances.numAttributes() - 1][m_Instances
       .numClasses()];
-    m_ClassDistribution = new DiscreteEstimator(m_Instances.numClasses(), true);
+    m_ClassDistribution = new DiscreteEstimator(m_Instances.numClasses(), false);
     int attIndex = 0;
     Enumeration<Attribute> enu = m_Instances.enumerateAttributes();
     while (enu.hasMoreElements()) {
