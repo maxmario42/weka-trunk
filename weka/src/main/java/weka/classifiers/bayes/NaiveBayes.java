@@ -328,10 +328,10 @@ public class NaiveBayes extends AbstractClassifier implements OptionHandler,
             instance.value(attribute), instance.weight());
         }
         attIndex++;
-      }
+      }/**
       if (instance.weight()==0){
           m_ClassDistribution.setLaplace(true);
-      }
+      }**/
           
       m_ClassDistribution.addValue(instance.classValue(), instance.weight());
     }
